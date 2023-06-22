@@ -94,7 +94,7 @@ class BookingDelete (LoginRequiredMixin, DeleteView):
     success_url = '/bookings'
 
 
-def add_photo(request, car_id):
+def add_photo(request, car_id, booking_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -105,6 +105,7 @@ def add_photo(request, car_id):
             s3.upload_fileobj(photo_file, bucket, key)
             url = f"{os.environ['S3_BASE_URL']}/{bucket}/{key}"
             Photo.objects.create(url=url, car_id=car_id)
+            Photo.objects.create(url=url, booking_id_id=booking_id)
         except Exception as e:
             print('An error occurred uploading file to S3')
             print(e)
