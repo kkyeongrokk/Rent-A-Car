@@ -1,34 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Bookings</h1>
+<div class="containers">
 
-{% if current_bookings %}
-  <h4>Current Booking</h4>
-  {% for current_booking in current_bookings %}
-    <div class="booking-card">
-      <p>User: {{ current_booking.user }}</p>
-      <p>Start Date: {{ current_booking.trip_start }}</p>
-      <p>End Date: {{ current_booking.trip_end }}</p>
-      <p>Car: {{ current_booking.car.model }} </p>
-      <div class="booking-links">
-        <a href="{% url 'edit_booking' current_booking.booking_number %}"> Edit </a>
-        <a href="{% url 'cancel_booking' current_booking.booking_number %}">Delete</a>
+  <h1>My Bookings</h1>
+  
+  {% if current_bookings %}
+    <h4>Current Booking</h4>
+    {% for current_booking in current_bookings %}
+      <div class="booking-card">
+        <p>User: {{ current_booking.user }}</p>
+        <p>Start Date: {{ current_booking.trip_start }}</p>
+        <p>End Date: {{ current_booking.trip_end }}</p>
+        <p>Car: {{ current_booking.car.model }} </p>
+        <div class="booking-links">
+          <a href="{% url 'edit_booking' current_booking.booking_number %}"> Edit </a>
+          <a href="{% url 'cancel_booking' current_booking.booking_number %}">Delete</a>
+        </div>
       </div>
-    </div>
-  {% endfor %}
-{% endif %}
-
-{% if past_bookings %}
-  <h4>Booking History</h4>
-  {% for past_booking in past_bookings %}
-    <div class="booking-card">
-      <p>User: {{ past_booking.user }}</p>
-      <p>Start Date: {{ past_booking.trip_start }}</p>
-      <p>End Date: {{ past_booking.trip_end }}</p>
-      <p>Car: {{ past_booking.car.model }} </p>
-    </div>
-  {% endfor %}
-{% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {% if past_bookings %}
+    <h4>Booking History</h4>
+    {% for past_booking in past_bookings %}
+      <div class="booking-card">
+        <p>User: {{ past_booking.user }}</p>
+        <p>Start Date: {{ past_booking.trip_start }}</p>
+        <p>End Date: {{ past_booking.trip_end }}</p>
+        <p>Car: {{ past_booking.car.model }} </p>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
 
 {% endblock %}
