@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import random
 from django.contrib.auth.models import User
+from django import forms
 
 # Create your models here.
 
@@ -37,6 +38,23 @@ class Booking(models.Model):
     def get_absolute_url(self):
         return reverse('all_bookings', )
     
+    
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+#REVIEW
+class Review(models.Model):
+    content = models.TextField()
+    rating = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Review by {self.user.username} on {self.car.brand}"
+    
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['content', 'rating']

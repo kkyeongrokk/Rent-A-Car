@@ -5,7 +5,7 @@
     
     <div class="detail-pic-container">
         {% for photo in car.photo_set.all %}
-        <img style="height: 700px; padding: 0;" class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
+        <img style="height: 700px;"class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
         {% empty %}
         <div class="card-panel teal-text center-align">No Photos Uploaded</div>
         {% endfor %}
@@ -42,8 +42,49 @@
     </div>
 </div>
     
+<div>
+  <h2>Leave a Review</h2>
+    <div>
+      <label for=“comment”>Comment:</label>
+      <textarea id=“comment” name=“comment” rows=“4" cols=“50”></textarea>
+    </div>
+    <div>
+      <label for=“rating”>Rating:</label>
+      <select id=“rating” name=“rating”>
+        <option value=“1”>1 Star</option>
+        <option value=“2">2 Stars</option>
+        <option value=“3”>3 Stars</option>
+        <option value=“4">4 Stars</option>
+        <option value=“5”>5 Stars</option>
+      </select>
+    </div>
+   
+    <div>
+      <form action="{% url 'add_review' car_id=car.id %}" method="POST">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <input type="hidden" name="car_id" value="{{ car.id }}">
+        <button type="submit">Submit Review</button>
+      </form>
+    </div>
+<!-- Display Existing Reviews -->
+<div>
+  <h2>Reviews</h2>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <p> {{ review.content }}</p>
+        <p>Rating: {{ review.rating }}⭐ </p>
+        <p>User: {{ review.user.username }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+    
+    
+    
     <script>
-        const startDateEl = document.getElementById('id_trip_start');
+    const startDateEl = document.getElementById('id_trip_start');
     const endDateEl = document.getElementById('id_trip_end');
     const totalPriceEl = document.getElementById('total_price');
     const pricePerDayEl = document.getElementById('price-per-day');
