@@ -118,10 +118,6 @@ a {
   flex-direction: column;
   align-items: center;
 }
-.info-form-container {
-  display: flex;
-}
-
 
 .car-info {
 margin-right: 200px;

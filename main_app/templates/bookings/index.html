@@ -8,36 +8,45 @@
   {% if current_bookings %}
     <h4 style="text-align: center;">Current Booking</h4>
     <div id="cars-container">
-    {% for current_booking in current_bookings %}
-      <div class="booking-card">
-        <p>User: {{ current_booking.user }}</p>
-        <p>Start Date: {{ current_booking.trip_start }}</p>
-        <p>End Date: {{ current_booking.trip_end }}</p>
-        <p>Car: {{ current_booking.car.model }} </p>
-        {% for photo in current_booking.car.photo_set.all %}
-        <img style="height: 200px; width: 400px;"class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
-        {% empty %}
-        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-        {% endfor %}
-        <div class="booking-links">
-          <a href="{% url 'edit_booking' current_booking.booking_number %}"> Edit </a>
-          <a href="{% url 'cancel_booking' current_booking.booking_number %}">Delete</a>
+      {% for current_booking in current_bookings %}
+        <div class="booking-card">
+          <p>User: {{ current_booking.user }}</p>
+          <p>Start Date: {{ current_booking.trip_start }}</p>
+          <p>End Date: {{ current_booking.trip_end }}</p>
+          <p>Car: {{ current_booking.car.model }} </p>
+          {% for photo in current_booking.car.photo_set.all %}
+          <img style="height: 200px; width: 400px;"class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
+          {% empty %}
+          <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+          {% endfor %}
+          <div class="booking-links">
+            <a href="{% url 'edit_booking' current_booking.booking_number %}"> Edit </a>
+            <a href="{% url 'cancel_booking' current_booking.booking_number %}">Delete</a>
+          </div>
         </div>
-      </div>
       {% endfor %}
     </div>
   {% endif %}
   
   {% if past_bookings %}
-    <h4>Booking History</h4>
-    {% for past_booking in past_bookings %}
-      <div class="booking-card">
-        <p>User: {{ past_booking.user }}</p>
-        <p>Start Date: {{ past_booking.trip_start }}</p>
-        <p>End Date: {{ past_booking.trip_end }}</p>
-        <p>Car: {{ past_booking.car.model }} </p>
-      </div>
-    {% endfor %}
+    <h4 style="text-align: center;">Booking History</h4>
+    <div id="cars-container">
+      {% for past_booking in past_bookings %}
+        <div class="booking-card">
+          <p>User: {{ past_booking.user }}</p>
+          <p>Start Date: {{ past_booking.trip_start }}</p>
+          <p>End Date: {{ past_booking.trip_end }}</p>
+          <p>Car: {{ past_booking.car.model }} </p>
+          {% for photo in past_booking.car.photo_set.all %}
+            <img style="height: 200px; width: 400px;"class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
+          {% empty %}
+            <div class="card-panel teal-text center-align">
+              No Photos Uploaded
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
   {% endif %}
 </div>
 
