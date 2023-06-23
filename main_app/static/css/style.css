@@ -33,11 +33,18 @@ a {
 }
 
 .booking-card {
-  background-color: beige;
+  background-color: lightgrey;
   border-radius: 10px;
-  border: 2px solid grey;
+  border: 2px solid lightgrey;
   padding: 10px;
   margin-bottom: 10px;
+  width: 300px;
+}
+
+.booking-card:hover {
+  background-color: lightgray;
+  color: black;
+  transition: background-color 0.15s ease-in-out;
 }
 
 .booking-links a {
@@ -161,4 +168,12 @@ img.responsive-img, video.responsive-video {
   width: 100%;
   border: .5vmin groove lightgray;
   border-radius: 5px;
+}
+
+.booking-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the value as needed */
 }

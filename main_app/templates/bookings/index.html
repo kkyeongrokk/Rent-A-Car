@@ -3,22 +3,29 @@
 
 <div class="containers">
 
-  <h1>My Bookings</h1>
+  <h1 style="text-align: center;">My Bookings</h1>
   
   {% if current_bookings %}
-    <h4>Current Booking</h4>
+    <h4 style="text-align: center;">Current Booking</h4>
+    <div id="cars-container">
     {% for current_booking in current_bookings %}
       <div class="booking-card">
         <p>User: {{ current_booking.user }}</p>
         <p>Start Date: {{ current_booking.trip_start }}</p>
         <p>End Date: {{ current_booking.trip_end }}</p>
         <p>Car: {{ current_booking.car.model }} </p>
+        {% for photo in current_booking.car.photo_set.all %}
+        <img style="height: 200px; width: 400px;"class="responsive-img card-panel" class="detail-pic" src="{{photo.url}}">
+        {% empty %}
+        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
         <div class="booking-links">
           <a href="{% url 'edit_booking' current_booking.booking_number %}"> Edit </a>
           <a href="{% url 'cancel_booking' current_booking.booking_number %}">Delete</a>
         </div>
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   {% endif %}
   
   {% if past_bookings %}

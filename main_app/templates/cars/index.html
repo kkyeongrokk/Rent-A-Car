@@ -8,7 +8,7 @@
   {% for photo in car.photo_set.all %}
   <a href="{% url 'detail' car.id %}">
     <div class="card">
-      <div style="height: 100; width: 50;">
+      <div style="height: 300px; width: 400px;">
         <img class="car-img responsive-img card-panel" src="{{photo.url}}">
       </div>
       {% empty %}
